@@ -11,10 +11,9 @@ services:
             - "MYSQL_RANDOM_ROOT_PASSWORD=yes"
             - "MYSQL_USER=pterodactyl"
         networks:
-            - traefik
             - default
         volumes:
-            - ./db:/var/lib/mysql
+            - db:/var/lib/mysql
 
     http:
         build:
@@ -23,15 +22,14 @@ services:
         restart: unless-stopped
         depends_on:
             - "php"
-        expose:
-            - 80
+        ports:
+            - 80:80
         networks:
-            - traefik
             - default
         volumes:
-            - ./env:/var/www/html/env
-            - ./panel:/var/www/html/pterodactyl
-            - ./storage:/var/www/html/pterodactyl/storage
+            - env:/var/www/html/env
+            - panel:/var/www/html/pterodactyl
+            - storage:/var/www/html/pterodactyl/storage
 
     php:
         build:
@@ -43,9 +41,9 @@ services:
         networks:
             - default
         volumes:
-            - ./env:/var/www/html/env
-            - ./panel:/var/www/html/pterodactyl
-            - ./storage:/var/www/html/pterodactyl/storage
+            - env:/var/www/html/env
+            - panel:/var/www/html/pterodactyl
+            - storage:/var/www/html/pterodactyl/storage
 
     redis:
         image: redis:alpine
@@ -56,5 +54,9 @@ services:
 networks:
     default:
         driver: bridge
-    traefik:
-        external: true
+
+volumes:
+    db:
+    env:
+    panel:
+    storage:
