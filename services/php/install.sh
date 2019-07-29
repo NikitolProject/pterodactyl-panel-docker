@@ -24,6 +24,7 @@ if [ "$run" = "y" ] || [ "$run" = "Y" ] || [ "$run" = "" ]; then
         read -n1 configureTPval
         if [ "$configureTPval" = "" ]; then
             configureTPval="*" 
+        fi
         printf "\n\nTRUSTED_PROXIES=$configureTPval" >> .env
     fi
     php artisan key:generate --force
