@@ -22,6 +22,10 @@ that Nginx performs better than Caddy in handling requests. In addition to this,
 Nginx, while having a more complicated configuration file, doesn't enforce HTTPS,
 a feature of Caddy which only complicates the setup of the HTTP Docker container.
 
+Also if the nginx receives a request from a reverse proxy, it will set the HSTS header
+and redirect to HTTPS automatically. If you do not want this behaviour, adjust the `nginx.conf`
+as you like.
+
 ## Usage
 The instructions are fairly self explanatory: clone the repository and launch the
 project. Instructions on how to launch the project are listed below. All commands
