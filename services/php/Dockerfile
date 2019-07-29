@@ -39,11 +39,12 @@ RUN mkdir -p /var/log/pterodactyl
 
 COPY install.sh /usr/local/bin/install
 COPY upgrade.sh /usr/local/bin/upgrade
-COPY schedule /var/spool/cron/crontabs/schedule
+COPY schedule .
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 
-RUN chmod +x /usr/local/bin/install; \
+RUN cat schedule >> /var/spool/cron/crontabs/root; \
+    chmod +x /usr/local/bin/install; \
     chmod +x /usr/local/bin/upgrade
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
