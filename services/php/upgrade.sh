@@ -1,18 +1,15 @@
 #!/bin/ash
 
-##
-# This is an install script to quickly upgrade Pterodactyl Panel. Before running,
-# please BACK UP any important data!
-##
 if [ "$(whoami)" != "pterodactyl" ]; then
     echo "Rerunning script as webserver user."
     exec su -c /usr/local/bin/upgrade pterodactyl
 fi
 
+echo "!!! PLEASE BACKUP ANY IMPORTANT DATA BEFORE UPGRADING !!!"
 echo "Are you sure you want to continue the upgrade script? (Y/n)"
 read -n1 run
 
-if [ "$run" = "Y" ]; then
+if [ "$run" = "y" ] || [ "$run" = "Y" ]; then
     echo "Running upgrade script."
     php artisan down
 

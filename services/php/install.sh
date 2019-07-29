@@ -12,13 +12,20 @@ fi
 echo "Are you sure you want to continue the install script? (Y/n)"
 read -n1 run
 
-if [ "$run" = "y" ] || [ "$run" = "Y" ]; then
+if [ "$run" = "y" ] || [ "$run" = "Y" ] || [ "$run" = "" ]; then
     echo "Running install script."
     echo "Waiting 15 seconds for MariaDB to be ready."
     sleep 15
 
-    echo "Adding additional parameters to .env file."
-    printf "\n\nTRUSTED_PROXIES=*" >> .env
+    echo "Configure trusted proxies (this will enable reverse proxy functionality)? (Y/n)"
+    read -n1 configureTP
+    if [ "$configureTP" = "y" ] || [ "$configureTP" = "Y" ] || [ "$run" = "" ]; then
+        echo "Please enter a value (comma separated list of allowed IPs, * to allow all) for TRUSTED_PROXIES: [*]"
+        read -n1 configureTPval
+        if [ "$configureTPval" = "" ]; then
+            configureTPval="*" 
+        printf "\n\nTRUSTED_PROXIES=$configureTPval" >> .env
+    fi
     php artisan key:generate --force
 
     echo "Running configuration scripts."
