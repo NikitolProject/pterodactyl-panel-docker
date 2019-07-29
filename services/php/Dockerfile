@@ -39,7 +39,7 @@ RUN mkdir -p /var/log/pterodactyl
 
 COPY install.sh /usr/local/bin/install
 COPY upgrade.sh /usr/local/bin/upgrade
-COPY schedule /var/spoon/cron/crontabs/schedule
+COPY schedule /var/spool/cron/crontabs/schedule
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 
