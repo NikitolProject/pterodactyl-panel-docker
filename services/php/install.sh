@@ -12,7 +12,7 @@ fi
 echo "Are you sure you want to continue the install script? (Y/n)"
 read -n1 run
 
-if [ "$run" = "y" ] || [ "$run" = "Y" ] || [ "$run" = "" ]; then
+if [ "$run" = "y" ] || [ "$run" = "Y" ]; then
     echo "Running install script."
     echo "Waiting 15 seconds for MariaDB to be ready."
     sleep 15
@@ -25,7 +25,7 @@ if [ "$run" = "y" ] || [ "$run" = "Y" ] || [ "$run" = "" ]; then
         if [ "$configureTPval" = "" ]; then
             configureTPval="*" 
         fi
-        printf "\n\nTRUSTED_PROXIES=$configureTPval" >> .env
+        grep -q 'TRUSTED_PROXIES.*' .env && sed -i .env -e 's/TRUSTED_PROXIES.*/TRUSTED_PROXIES='$configureTPval'/' || printf "\nTRUSTED_PROXIES=$configureTPval\n" >> .env
     fi
     php artisan key:generate --force
 

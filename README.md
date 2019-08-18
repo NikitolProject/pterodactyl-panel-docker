@@ -21,8 +21,7 @@ of containers and Dockerfiles.
 that Nginx performs better than Caddy in handling requests. In addition to this,
 Nginx, while having a more complicated configuration file, doesn't enforce HTTPS,
 a feature of Caddy which only complicates the setup of the HTTP Docker container.
-
-Also if the nginx receives a request from a reverse proxy, it will set the HSTS header
+3. Additionally, if the nginx receives a request from a reverse proxy, it will set the HSTS header
 and redirect to HTTPS automatically. If you do not want this behaviour, adjust the `nginx.conf`
 as you like.
 
