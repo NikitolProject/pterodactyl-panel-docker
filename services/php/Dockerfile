@@ -1,6 +1,6 @@
-FROM php:7.2-fpm-alpine
+FROM docker.io/library/php:7.3-fpm-alpine
 
-ENV PANEL_VERSION=v0.7.17
+ENV PANEL_VERSION=v0.7.18
 
 # Set up all the dependencies for the PHP container.
 RUN apk add --no-cache curl git supervisor tar unzip; \

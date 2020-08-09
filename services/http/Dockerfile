@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM docker.io/library/nginx:alpine
 
 LABEL maintainer="tehtotalpwnage@gmail.com"
 
