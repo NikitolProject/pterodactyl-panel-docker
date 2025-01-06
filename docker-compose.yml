@@ -23,7 +23,7 @@ services:
         depends_on:
             - "php"
         ports:
-            - 80:80
+            - 8803:80
         networks:
             - default
         volumes:
